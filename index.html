@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>$layyyter — wor$t man in america</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html, body {
+      height: 100%;
+      background: #000;
+      color: #0ff;
+      font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+      overflow-x: hidden;
+    }
+
+    body::before {
+      content: '';
+      position: fixed;
+      inset: -50%;
+      z-index: 9998;
+      pointer-events: none;
+      opacity: 0.035;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+      width: 200%; height: 200%;
+      animation: grain 0.5s steps(1) infinite;
+    }
+    @keyframes grain {
+      0%   { transform: translate(0,0); }
+      25%  { transform: translate(-3%,2%); }
+      50%  { transform: translate(2%,-2%); }
+      75%  { transform: translate(-1%,3%); }
+      100% { transform: translate(3%,-1%); }
+    }
+
+    /* Dollar signs */
+    .dollar {
+      position: fixed;
+      color: #0ff;
+      font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+      font-weight: 700;
+      pointer-events: none;
+      z-index: 0;
+      opacity: 0;
+      animation: floatUp var(--dur) var(--delay) linear infinite;
+      left: var(--x);
+      font-size: var(--size);
+      top: 110vh;
+    }
+
+    @keyframes floatUp {
+      0%   { opacity: 0;    transform: translateY(0)       rotate(var(--rot0)); }
+      8%   { opacity: var(--op); }
+      90%  { opacity: var(--op); }
+      100% { opacity: 0;    transform: translateY(-120vh)  rotate(var(--rot1)); }
+    }
+
+    .site {
+      position: relative;
+      z-index: 1;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 3rem 1.5rem 5rem;
+    }
+
+    header {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      animation: fadeDown 0.8s ease both;
+    }
+
+    @keyframes fadeDown {
+      from { opacity: 0; transform: translateY(-20px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    .logo-img {
+      width: min(520px, 85vw);
+      display: block;
+    }
+
+    .divider {
+      width: min(560px, 88vw);
+      height: 1px;
+      margin: 2rem auto;
+      background: rgba(0,255,255,0.18);
+      animation: fadeDown 0.8s 0.35s ease both;
+    }
+
+    .video-section {
+      width: min(860px, 94vw);
+      margin: 0 auto 2.5rem;
+      animation: fadeUp 0.8s 0.4s ease both;
+    }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(24px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    .video-frame {
+      border: 1px solid rgba(0,255,255,0.2);
+      background: #000;
+      overflow: hidden;
+    }
+
+    video {
+      display: block;
+      width: 100%;
+      aspect-ratio: 16/9;
+      background: #000;
+    }
+
+    .video-info {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 0.75rem;
+      font-size: 0.62rem;
+      letter-spacing: 0.35em;
+      text-transform: lowercase;
+      color: rgba(0,255,255,0.28);
+    }
+
+    .blink { animation: blink 1.4s step-end infinite; }
+    @keyframes blink { 50% { opacity: 0; } }
+
+    .presave-section {
+      margin: 0.5rem auto 2rem;
+      text-align: center;
+      animation: fadeUp 0.8s 0.6s ease both;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 1.1rem;
+    }
+
+    .presave-label {
+      font-size: 0.62rem;
+      font-weight: 300;
+      letter-spacing: 0.5em;
+      text-transform: lowercase;
+      color: rgba(0,255,255,0.35);
+    }
+
+    .presave-btn {
+      display: inline-block;
+      font-family: inherit;
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.4em;
+      text-transform: lowercase;
+      text-decoration: none;
+      padding: 0.9rem 2.6rem;
+      color: #000;
+      background: #0ff;
+      border: 1px solid #0ff;
+      transition: background 0.2s, color 0.2s;
+      cursor: pointer;
+    }
+
+    .presave-btn:hover {
+      background: #000;
+      color: #0ff;
+    }
+
+    footer {
+      position: fixed;
+      bottom: 1rem;
+      width: 100%;
+      text-align: center;
+      font-size: 0.55rem;
+      letter-spacing: 0.4em;
+      text-transform: lowercase;
+      color: rgba(0,255,255,0.15);
+      z-index: 2;
+    }
+  </style>
+</head>
+<body>
+
+<div class="site">
+  <header>
+    <img class="logo-img" src="logo.png" alt="$LAYYYTER" />
+  </header>
+
+  <div class="divider"></div>
+
+  <section class="video-section">
+    <div class="video-frame">
+      <video controls preload="metadata">
+        <source src="crank2.mp4" type="video/mp4" />
+        Your browser does not support HTML5 video.
+      </video>
+    </div>
+    <div class="video-info">
+      <span>crank 2</span>
+      <span class="blink">● playing</span>
+      <span>2026</span>
+    </div>
+  </section>
+
+  <section class="presave-section">
+    <a class="presave-btn" href="https://www.slayyyter.com/music" target="_blank" rel="noopener">pre-save now</a>
+  </section>
+</div>
+
+<footer>© $layyyter &nbsp;·&nbsp; wor$t man in america &nbsp;·&nbsp; 2026</footer>
+
+<script>
+  const count = 28;
+  for (let i = 0; i < count; i++) {
+    const el = document.createElement('div');
+    el.className = 'dollar';
+    el.textContent = '$';
+    const size = (Math.random() * 2.2 + 0.6).toFixed(2);
+    const op = (Math.random() * 0.12 + 0.04).toFixed(2);
+    const dur = (Math.random() * 10 + 8).toFixed(1);
+    const delay = (Math.random() * 14).toFixed(1);
+    const rot0 = (Math.random() * 40 - 20).toFixed(0);
+    const rot1 = (Math.random() * 80 - 40).toFixed(0);
+    el.style.setProperty('--x', (Math.random() * 100).toFixed(1) + 'vw');
+    el.style.setProperty('--size', size + 'rem');
+    el.style.setProperty('--op', op);
+    el.style.setProperty('--dur', dur + 's');
+    el.style.setProperty('--delay', '-' + delay + 's');
+    el.style.setProperty('--rot0', rot0 + 'deg');
+    el.style.setProperty('--rot1', rot1 + 'deg');
+    document.body.appendChild(el);
+  }
+</script>
+
+</body>
+</html>
